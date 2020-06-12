@@ -26,7 +26,7 @@ def ifft(x, axes=(-1,)):
 
 if __name__ == '__main__':
 
-    disp = False
+    disp = True # generate all plots
 
     # 1) Sparse Signals and Denoising
     # 1a) Sparse Signals
@@ -255,9 +255,12 @@ if __name__ == '__main__':
             lamda *= mu
         return X
 
+    # These recons need some parameter tuning:
+    # Uniform:
     Y = Mu.copy()
     X = pocs2d(Mu, mask_unif, lamda=thresh[0]/3, mu=.98, niter=30)
 
+    # Comment above out and uncomment below for variable density
     #Y = Mv.copy()
     #X = pocs2d(Mv, mask_vardens, lamda=thresh[0]/5, niter=10)
     recon = ifft(X, axes=(0, 1))
